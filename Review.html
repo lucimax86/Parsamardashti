@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>عنوان صفحه | پارسا مردشتی</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            background-color: #faf8f5;
+            color: #1c1c1c;
+            line-height: 1.85;
+            font-weight: 400;
+            font-size: 16px;
+            min-height: 100vh;
+            background-image:
+                radial-gradient(ellipse at 50% 0%, rgba(184, 147, 90, 0.04) 0%, transparent 70%),
+                radial-gradient(ellipse at 85% 100%, rgba(184, 147, 90, 0.03) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        :root {
+            --bg: #faf8f5;
+            --card-bg: #ffffff;
+            --text: #1c1c1c;
+            --text-secondary: #6e6a64;
+            --text-muted: #9b9790;
+            --accent: #b8935a;
+            --accent-soft: #d4c4a8;
+            --accent-dark: #8b6f3f;
+            --border: #e7e3db;
+            --border-light: #f0ede7;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --radius-sm: 8px;
+            --radius: 14px;
+            --radius-lg: 20px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --max-width: 680px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            right: 16px;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            z-index: 1000;
+            font-size: 14px;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .site-header {
+            padding: 28px 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 248, 245, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid transparent;
+            transition: all var(--transition);
+        }
+        .site-header.scrolled {
+            border-bottom-color: var(--border-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: var(--text);
+            line-height: 1.2;
+            transition: color var(--transition);
+        }
+        .brand:hover .brand-name {
+            color: var(--accent-dark);
+        }
+        .brand-tagline {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 20px;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--card-bg);
+            color: var(--accent-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .main-content {
+            padding: 24px 0 60px;
+        }
+
+        .article-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: box-shadow var(--transition);
+        }
+        .article-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .article-body {
+            padding: 32px 28px;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+        }
+        .category-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent-dark);
+            background: #faf6ef;
+            padding: 5px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            letter-spacing: 0.1px;
+            transition: all var(--transition);
+            border: 1px solid transparent;
+        }
+        .category-tag:hover {
+            background: #f5efe2;
+            border-color: var(--accent-soft);
+            color: #7a5e32;
+        }
+
+        .entry-title {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.45;
+            letter-spacing: -0.4px;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .title-divider {
+            display: block;
+            width: 48px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            margin-bottom: 16px;
+            opacity: 0.7;
+        }
+
+        .post-date {
+            display: block;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+        .post-date .date-value {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .movie-info {
+            background: #fdfcf9;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 18px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 28px;
+            align-items: center;
+        }
+        .movie-info-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            letter-spacing: 0.2px;
+        }
+        .movie-info-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .movie-info-value em {
+            font-style: italic;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .featured-image-wrapper {
+            margin-bottom: 26px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            position: relative;
+            background: #f5f2ec;
+            box-shadow: var(--shadow-sm);
+        }
+        .featured-image-wrapper img {
+            display: block;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .featured-image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        .featured-image-wrapper .image-caption {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+            color: #fff;
+            font-size: 12px;
+            padding: 28px 16px 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity var(--transition);
+            pointer-events: none;
+        }
+        .featured-image-wrapper:hover .image-caption {
+            opacity: 1;
+        }
+
+        .rating-display {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .rating-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: #fdfaf4;
+            border: 3px solid var(--accent-soft);
+            flex-shrink: 0;
+            position: relative;
+        }
+        .rating-badge .rating-number {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--accent-dark);
+            line-height: 1;
+        }
+        .rating-badge .rating-total {
+            font-size: 11px;
+            color: var(--text-muted);
+            position: absolute;
+            bottom: 10px;
+            font-weight: 400;
+        }
+        .rating-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            flex: 1;
+            min-width: 200px;
+        }
+        .rating-label-tag {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 14px;
+            letter-spacing: 0.2px;
+        }
+        .rating-label-tag.average {
+            background: #fef9f0;
+            color: #b88a3e;
+            border: 1px solid #f0dfbf;
+        }
+        .rating-label-tag.good {
+            background: #f2faf4;
+            color: #4a8c5c;
+            border: 1px solid #c8e6d0;
+        }
+        .rating-label-tag.excellent {
+            background: #f4f7fd;
+            color: #3d5f9a;
+            border: 1px solid #cddaf0;
+        }
+        .rating-label-tag.poor {
+            background: #fdf5f5;
+            color: #a04848;
+            border: 1px solid #f0cece;
+        }
+
+        .review-content {
+            font-size: 16px;
+            line-height: 2;
+            color: var(--text);
+            font-weight: 400;
+        }
+        .review-content p {
+            margin-bottom: 16px;
+        }
+        .review-content p:last-child {
+            margin-bottom: 0;
+        }
+        .review-content strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .post-share {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-top: 32px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border-light);
+        }
+        .share-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #f9f7f3;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 16px;
+            transition: all var(--transition);
+            border: 1px solid transparent;
+            flex-shrink: 0;
+        }
+        .share-btn:hover {
+            background: var(--card-bg);
+            border-color: var(--border);
+            color: var(--accent-dark);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+        .share-btn svg {
+            width: 17px;
+            height: 17px;
+            fill: currentColor;
+        }
+        .share-comments-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 9px 16px;
+            border-radius: 20px;
+            background: #f9f7f3;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+        .share-comments-link:hover {
+            background: var(--card-bg);
+            color: var(--accent-dark);
+            box-shadow: var(--shadow-sm);
+        }
+        .share-comments-link .comment-count {
+            font-weight: 700;
+            color: var(--accent-dark);
+        }
+        .share-author {
+            margin-right: auto;
+            font-size: 13px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .share-author a {
+            color: var(--accent-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition);
+        }
+        .share-author a:hover {
+            color: #6b4f2a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 20px 0 40px;
+            font-size: 13px;
+            color: var(--text-muted);
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .site-footer a {
+            color: var(--accent-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .site-footer a:hover {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .footer-divider {
+            display: block;
+            width: 32px;
+            height: 2px;
+            background: var(--accent-soft);
+            border-radius: 1px;
+            margin: 0 auto 14px;
+            opacity: 0.6;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all var(--transition);
+            z-index: 50;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 18px;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            background: #f9f7f3;
+            border-color: var(--accent-soft);
+            color: var(--accent-dark);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+            .brand-name {
+                font-size: 20px;
+            }
+            .brand-tagline {
+                font-size: 11px;
+            }
+            .nav-links {
+                gap: 2px;
+            }
+            .nav-links a {
+                font-size: 12.5px;
+                padding: 7px 11px;
+                border-radius: 16px;
+            }
+            .article-body {
+                padding: 22px 16px;
+            }
+            .entry-title {
+                font-size: 22px;
+            }
+            .movie-info {
+                padding: 14px 16px;
+                gap: 8px 20px;
+            }
+            .movie-info-value {
+                font-size: 14px;
+            }
+            .rating-display {
+                gap: 12px;
+            }
+            .rating-badge {
+                width: 54px;
+                height: 54px;
+            }
+            .rating-badge .rating-number {
+                font-size: 22px;
+            }
+            .rating-text {
+                font-size: 13.5px;
+            }
+            .review-content {
+                font-size: 15px;
+                line-height: 1.9;
+            }
+            .post-share {
+                gap: 8px;
+                padding-top: 16px;
+                margin-top: 24px;
+            }
+            .share-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+            }
+            .share-btn svg {
+                width: 15px;
+                height: 15px;
+            }
+            .back-to-top {
+                bottom: 16px;
+                left: 16px;
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 15px;
+            }
+            .container {
+                padding: 0 10px;
+            }
+            .header-inner {
+                padding: 0 10px;
+            }
+            .brand-name {
+                font-size: 18px;
+            }
+            .nav-links a {
+                font-size: 11.5px;
+                padding: 6px 9px;
+                border-radius: 14px;
+            }
+            .article-body {
+                padding: 18px 12px;
+            }
+            .entry-title {
+                font-size: 19px;
+            }
+            .title-divider {
+                width: 36px;
+                height: 2.5px;
+                margin-bottom: 12px;
+            }
+            .movie-info {
+                flex-direction: column;
+                gap: 6px;
+                padding: 12px 14px;
+            }
+            .rating-display {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .rating-badge {
+                width: 48px;
+                height: 48px;
+            }
+            .rating-badge .rating-number {
+                font-size: 20px;
+            }
+            .rating-badge .rating-total {
+                font-size: 10px;
+                bottom: 7px;
+            }
+            .post-share {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .share-author {
+                margin-right: 0;
+            }
+            .article-card {
+                border-radius: var(--radius);
+            }
+            .featured-image-wrapper {
+                border-radius: var(--radius-sm);
+                margin-bottom: 18px;
+            }
+            .site-header {
+                padding: 16px 0 12px;
+            }
+            .back-to-top {
+                bottom: 12px;
+                left: 12px;
+                width: 34px;
+                height: 34px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .entry-title {
+                font-size: 17px;
+            }
+            .brand-name {
+                font-size: 16px;
+            }
+            .brand-tagline {
+                font-size: 10px;
+            }
+            .nav-links {
+                gap: 1px;
+            }
+            .nav-links a {
+                font-size: 10.5px;
+                padding: 5px 7px;
+                border-radius: 12px;
+            }
+            .category-tag {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
+            .review-content {
+                font-size: 14px;
+                line-height: 1.85;
+            }
+            .share-btn {
+                width: 30px;
+                height: 30px;
+            }
+            .share-btn svg {
+                width: 13px;
+                height: 13px;
+            }
+            .rating-badge {
+                width: 42px;
+                height: 42px;
+            }
+            .rating-badge .rating-number {
+                font-size: 18px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+            .site-header,
+            .back-to-top,
+            .site-footer,
+            .post-share {
+                display: none;
+            }
+            .article-card {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">پرش به محتوای اصلی</a>
+
+    <header class="site-header" id="site-header">
+        <div class="header-inner">
+            <a href="/" class="brand" aria-label="صفحه اصلی">
+                <span class="brand-name">پارسا مردشتی</span>
+                <span class="brand-tagline">یادداشت‌های سینمایی</span>
+            </a>
+            <nav aria-label="ناوبری اصلی">
+                <ul class="nav-links">
+                    <li><a href="#" class="active">نقد فیلم</a></li>
+                    <li><a href="#">یادداشت‌ها</a></li>
+                    <li><a href="#">درباره من</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content container" id="main-content">
+        <article class="article-card">
+            <div class="article-body">
+
+                <div class="categories">
+                    <a href="#" class="category-tag">دسته‌بندی ۱</a>
+                    <a href="#" class="category-tag">دسته‌بندی ۲</a>
+                    <a href="#" class="category-tag">دسته‌بندی ۳</a>
+                </div>
+
+                <h1 class="entry-title">عنوان مقاله</h1>
+                <span class="title-divider" aria-hidden="true"></span>
+
+                <span class="post-date">
+                    منتشر شده در <span class="date-value">تاریخ</span>
+                </span>
+
+                <div class="movie-info">
+                    <div>
+                        <span class="movie-info-label">عنوان:</span>
+                        <span class="movie-info-value"><em>نام فیلم</em></span>
+                    </div>
+                    <div>
+                        <span class="movie-info-label">کارگردان:</span>
+                        <span class="movie-info-value">نام کارگردان</span>
+                    </div>
+                    <div>
+                        <span class="movie-info-label">سال انتشار:</span>
+                        <span class="movie-info-value">۲۰۲۵</span>
+                    </div>
+                </div>
+
+                <div class="featured-image-wrapper">
+                    <img
+                    src="https://via.placeholder.com/500x213/f5f2ec/6e6a64?text=تصویر+شاخص"
+                    alt="توضیح تصویر"
+                    width="500"
+                    height="213"
+                    loading="lazy"
+                    />
+                    <span class="image-caption">توضیح کوتاه تصویر</span>
+                </div>
+
+                <div class="rating-display">
+                    <div class="rating-badge" aria-label="امتیاز">
+                        <span class="rating-number">–</span>
+                        <span class="rating-total">/۱۰</span>
+                    </div>
+                    <span class="rating-label-tag average">برچسب امتیاز</span>
+                    <span class="rating-text">
+                        <strong>امتیاز: —</strong>
+                        متن کوتاه درباره امتیاز و نظر کلی.
+                    </span>
+                </div>
+
+                <div class="review-content">
+                    <p>
+                        <strong>متن اصلی مقاله</strong> — لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                    </p>
+                    <p>
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                    </p>
+                    <p>
+                        در نهایت، <strong>نتیجه‌گیری</strong> — لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ.
+                    </p>
+                </div>
+
+                <div class="post-share">
+                    <span class="share-label">اشتراک‌گذاری:</span>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn" title="فیسبوک" aria-label="اشتراک در فیسبوک">
+                            <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                        </a>
+                        <a href="#" class="share-btn" title="توییتر" aria-label="اشتراک در توییتر">
+                            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="#" class="share-btn" title="تلگرام" aria-label="اشتراک در تلگرام">
+                            <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        </a>
+                        <a href="#" class="share-btn" title="کپی لینک" aria-label="کپی لینک">
+                            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                        </a>
+                    </div>
+                    <span class="share-author">
+                        نوشتهٔ <span><a href="#">نویسنده</a></span>
+                    </span>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <span class="footer-divider" aria-hidden="true"></span>
+        <p>© ۱۴۰۳ — <a href="#">پارسا مردشتی</a> • تمام حقوق محفوظ است.</p>
+        <p style="font-size:11px;margin-top:4px;">نقدها و یادداشت‌های سینمایی — با عشق به فیلم و داستان</p>
+    </footer>
+
+    <a href="#main-content" class="back-to-top" id="back-to-top" aria-label="بازگشت به بالا" title="بازگشت به بالا">
+        ↑
+    </a>
+
+    <script>
+        const header = document.getElementById('site-header');
+        const backToTop = document.getElementById('back-to-top');
+
+        function updateScrollState() {
+            const scrollY = window.scrollY;
+            if (scrollY > 10) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            if (scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollState, { passive: true });
+
+        backToTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        updateScrollState();
+
+        const copyLinkBtn = document.querySelector('.share-btn[aria-label="کپی لینک"]');
+        if (copyLinkBtn) {
+            copyLinkBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = window.location.href;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        const originalHTML = copyLinkBtn.innerHTML;
+                        copyLinkBtn.innerHTML = '<span style="font-size:14px;">✓</span>';
+                        copyLinkBtn.style.background = '#f2faf4';
+                        copyLinkBtn.style.color = '#4a8c5c';
+                        setTimeout(() => {
+                            copyLinkBtn.innerHTML = originalHTML;
+                            copyLinkBtn.style.background = '';
+                            copyLinkBtn.style.color = '';
+                        }, 1500);
+                    }).catch(() => {
+                        alert('لینک: ' + url);
+                    });
+                } else {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = url;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    const originalHTML = copyLinkBtn.innerHTML;
+                    copyLinkBtn.innerHTML = '<span style="font-size:14px;">✓</span>';
+                    copyLinkBtn.style.background = '#f2faf4';
+                    copyLinkBtn.style.color = '#4a8c5c';
+                    setTimeout(() => {
+                        copyLinkBtn.innerHTML = originalHTML;
+                        copyLinkBtn.style.background = '';
+                        copyLinkBtn.style.color = '';
+                    }, 1500);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
